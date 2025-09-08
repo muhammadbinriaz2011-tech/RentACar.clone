@@ -425,6 +425,96 @@
             color: #ccc;
         }
         
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modalopen 0.4s;
+        }
+        
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-60px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #333;
+        }
+        
+        .modal-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .modal-form .form-field {
+            margin-bottom: 20px;
+        }
+        
+        .switch-form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .switch-form a {
+            color: #1a6fc4;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        
+        /* User Info */
+        .user-info {
+            display: none;
+            align-items: center;
+        }
+        
+        .user-info span {
+            margin-right: 15px;
+        }
+        
+        .logout-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background-color: #ff3333;
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
@@ -452,6 +542,12 @@
             .cars-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .modal-content {
+                width: 95%;
+                margin: 15% auto;
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -473,9 +569,13 @@
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </nav>
-                <div class="auth-buttons">
-                    <button>Login</button>
-                    <button>Register</button>
+                <div class="auth-buttons" id="authButtons">
+                    <button id="loginBtn">Login</button>
+                    <button id="registerBtn">Register</button>
+                </div>
+                <div class="user-info" id="userInfo">
+                    <span>Welcome, <span id="userName">User</span></span>
+                    <button class="logout-btn" id="logoutBtn">Logout</button>
                 </div>
             </div>
         </div>
@@ -517,68 +617,30 @@
         </div>
     </section>
 
-    <!-- Featured Cars -->
-    <section class="container">
-        <h2 class="section-title">Featured Rental Cars</h2>
-        
-        <div class="cars-grid">
-            <!-- Car 1 -->
-            <div class="car-card">
-                <div class="car-image">
-                    <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Toyota Corolla">
-                </div>
-                <div class="car-details">
-                    <h3 class="car-title">Toyota Corolla</h3>
-                    <div class="car-specs">
-                        <span><i class="fas fa-car"></i> Sedan</span>
-                        <span><i class="fas fa-gas-pump"></i> Hybrid</span>
-                        <span><i class="fas fa-user"></i> 5 Seats</span>
-                    </div>
-                    <div class="car-price">
-                        $45 <span>/day</span>
-                    </div>
-                    <button class="book-btn">Book Now</button>
-                </div>
-            </div>
-            
-            <!-- Car 2 -->
-            <div class="car-card">
-                <div class="car-image">
-                    <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80" alt="Honda CR-V">
-                </div>
-                <div class="car-details">
-                    <h3 class="car-title">Honda CR-V</h3>
-                    <div class="car-specs">
-                        <span><i class="fas fa-car"></i> SUV</span>
-                        <span><i class="fas fa-gas-pump"></i> Gasoline</span>
-                        <span><i class="fas fa-user"></i> 5 Seats</span>
-                    </div>
-                    <div class="car-price">
-                        $65 <span>/day</span>
-                    </div>
-                    <button class="book-btn">Book Now</button>
-                </div>
-            </div>
-            
-            <!-- Car 3 -->
-            <div class="car-card">
-                <div class="car-image">
-                    <img src="https://images.unsplash.com/photo-1549399542-7e82138d0d6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="BMW 5 Series">
-                </div>
-                <div class="car-details">
-                    <h3 class="car-title">BMW 5 Series</h3>
-                    <div class="car-specs">
-                        <span><i class="fas fa-car"></i> Luxury</span>
-                        <span><i class="fas fa-gas-pump"></i> Gasoline</span>
-                        <span><i class="fas fa-user"></i> 5 Seats</span>
-                    </div>
-                    <div class="car-price">
-                        $99 <span>/day</span>
-                    </div>
-                    <button class="book-btn">Book Now</button>
-                </div>
-            </div>
-        </div>
+<!-- Featured Cars -->
+<section class="container" id="cars">
+    <h2 class="section-title">Featured Rental Cars</h2>
+    ...
+</section>
+
+<!-- Car Listing Page -->
+<section class="container" id="deals">
+    <h2 class="section-title">Available Rental Cars</h2>
+    ...
+</section>
+
+<!-- Booking System -->
+<section class="container" id="locations">
+    <h2 class="section-title">Book Your Rental Car</h2>
+    ...
+</section>
+
+<!-- Footer -->
+<footer id="contact">
+    <div class="container">
+        ...
+    </div>
+</footer>
     </section>
 
     <!-- Car Listing Page -->
@@ -757,12 +819,15 @@
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <a href="#">Home</a>
-                    <a href="#">Cars</a>
-                    <a href="#">Deals</a>
-                    <a href="#">Locations</a>
-                    <a href="#">Contact</a>
+                    <nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#cars">Cars</a></li>
+        <li><a href="#deals">Deals</a></li>
+        <li><a href="#locations">Locations</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
                 </div>
                 
                 <div class="footer-section">
@@ -789,16 +854,184 @@
         </div>
     </footer>
 
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="modal-title">Login to Your Account</h2>
+            <form class="modal-form">
+                <div class="form-field">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-field">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+                <div class="switch-form">
+                    <p>Don't have an account? <a id="switchToRegister">Register now</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="modal-title">Create an Account</h2>
+            <form class="modal-form">
+                <div class="form-field">
+                    <label for="register-name">Full Name</label>
+                    <input type="text" id="register-name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-field">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-field">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" placeholder="Create a password" required>
+                </div>
+                <div class="form-field">
+                    <label for="register-confirm-password">Confirm Password</label>
+                    <input type="password" id="register-confirm-password" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="submit-btn">Register</button>
+                <div class="switch-form">
+                    <p>Already have an account? <a id="switchToLogin">Login now</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // Simple JavaScript for form validation and redirection
+        // DOM Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const authButtons = document.getElementById('authButtons');
+        const userInfo = document.getElementById('userInfo');
+        const userName = document.getElementById('userName');
+        const switchToRegister = document.getElementById('switchToRegister');
+        const switchToLogin = document.getElementById('switchToLogin');
+        const closeButtons = document.querySelectorAll('.close');
+        const loginForm = document.querySelector('#loginModal form');
+        const registerForm = document.querySelector('#registerModal form');
+
+        // Show Login Modal
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+
+        // Show Register Modal
+        registerBtn.addEventListener('click', () => {
+            registerModal.style.display = 'block';
+        });
+
+        // Switch to Register Form
+        switchToRegister.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'block';
+        });
+
+        // Switch to Login Form
+        switchToLogin.addEventListener('click', () => {
+            registerModal.style.display = 'none';
+            loginModal.style.display = 'block';
+        });
+
+        // Close Modals
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                registerModal.style.display = 'none';
+            });
+        });
+
+        // Close Modal when clicking outside
+        window.addEventListener('click', (event) => {
+            if (event.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (event.target === registerModal) {
+                registerModal.style.display = 'none';
+            }
+        });
+
+        // Login Form Submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Simple validation
+            if (email && password) {
+                // In a real application, you would verify credentials with a server
+                // For demo purposes, we'll just simulate a successful login
+                const name = email.split('@')[0];
+                userName.textContent = name.charAt(0).toUpperCase() + name.slice(1);
+                authButtons.style.display = 'none';
+                userInfo.style.display = 'flex';
+                loginModal.style.display = 'none';
+                
+                alert('Login successful! Welcome back.');
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+
+        // Register Form Submission
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+            
+            // Simple validation
+            if (!name || !email || !password || !confirmPassword) {
+                alert('Please fill in all fields.');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+            
+            // In a real application, you would send this data to a server
+            // For demo purposes, we'll just simulate a successful registration
+            userName.textContent = name;
+            authButtons.style.display = 'none';
+            userInfo.style.display = 'flex';
+            registerModal.style.display = 'none';
+            
+            alert('Registration successful! Welcome to RentACar.');
+        });
+
+        // Logout Functionality
+        logoutBtn.addEventListener('click', () => {
+            authButtons.style.display = 'block';
+            userInfo.style.display = 'none';
+            alert('You have been logged out successfully.');
+        });
+
+        // Set minimum date for pickup and return dates to today
         document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('pickup-date').setAttribute('min', today);
+            document.getElementById('return-date').setAttribute('min', today);
+            
             // Search form submission
             const searchForm = document.querySelector('.search-form');
             if (searchForm) {
                 searchForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     alert('Searching for available cars...');
-                    // In a real application, this would redirect to search results
                 });
             }
             
@@ -808,7 +1041,6 @@
                 bookingForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     alert('Booking confirmed! You will receive a confirmation email shortly.');
-                    // In a real application, this would process the booking
                 });
             }
             
@@ -817,14 +1049,8 @@
             bookButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     alert('Redirecting to booking page...');
-                    // In a real application, this would redirect to booking page
                 });
             });
-            
-            // Set minimum date for pickup and return dates to today
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('pickup-date').setAttribute('min', today);
-            document.getElementById('return-date').setAttribute('min', today);
         });
     </script>
 </body>
