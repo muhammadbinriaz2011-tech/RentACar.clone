@@ -515,6 +515,149 @@
             background-color: #ff3333;
         }
         
+        /* Page Content Styles */
+        .page-content {
+            display: none;
+            padding: 40px 0;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+        
+        .page-text {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .deal-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .deal-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .deal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .deal-details {
+            padding: 20px;
+        }
+        
+        .deal-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .deal-description {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .deal-price {
+            color: #1a6fc4;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .location-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .location-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .location-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .location-details {
+            padding: 20px;
+        }
+        
+        .location-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .location-address {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .contact-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .contact-icon {
+            font-size: 40px;
+            color: #1a6fc4;
+            margin-bottom: 20px;
+        }
+        
+        .contact-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .contact-info {
+            color: #666;
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
@@ -548,6 +691,10 @@
                 margin: 15% auto;
                 padding: 20px;
             }
+            
+            .deals-grid, .locations-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -562,11 +709,11 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Cars</a></li>
-                        <li><a href="#">Deals</a></li>
-                        <li><a href="#">Locations</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="cars">Cars</a></li>
+                        <li><a href="#" class="nav-link" data-page="deals">Deals</a></li>
+                        <li><a href="#" class="nav-link" data-page="locations">Locations</a></li>
+                        <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons" id="authButtons">
@@ -581,233 +728,620 @@
         </div>
     </header>
 
-    <!-- Hero Section with Search -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Find Your Perfect Rental Car</h1>
-            <p>Discover the best deals on car rentals worldwide</p>
+    <!-- Home Page Content -->
+    <div id="home-page" class="page-content active">
+        <!-- Hero Section with Search -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Find Your Perfect Rental Car</h1>
+                <p>Discover the best deals on car rentals worldwide</p>
+                
+                <div class="search-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="pickup-location">Pick-up Location</label>
+                            <input type="text" id="pickup-location" placeholder="City, Airport, or Address">
+                        </div>
+                        <div class="form-group">
+                            <label for="pickup-date">Pick-up Date</label>
+                            <input type="date" id="pickup-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="return-date">Return Date</label>
+                            <input type="date" id="return-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="car-type">Car Type</label>
+                            <select id="car-type">
+                                <option value="">All Car Types</option>
+                                <option value="economy">Economy</option>
+                                <option value="suv">SUV</option>
+                                <option value="luxury">Luxury</option>
+                                <option value="minivan">Minivan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="search-btn">Search Cars</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Cars -->
+        <section class="container">
+            <h2 class="section-title">Featured Rental Cars</h2>
             
-            <div class="search-form">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="pickup-location">Pick-up Location</label>
-                        <input type="text" id="pickup-location" placeholder="City, Airport, or Address">
+            <div class="cars-grid">
+                <!-- Car 1 -->
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Toyota Corolla">
                     </div>
-                    <div class="form-group">
-                        <label for="pickup-date">Pick-up Date</label>
-                        <input type="date" id="pickup-date">
+                    <div class="car-details">
+                        <h3 class="car-title">Toyota Corolla</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-car"></i> Sedan</span>
+                            <span><i class="fas fa-gas-pump"></i> Hybrid</span>
+                            <span><i class="fas fa-user"></i> 5 Seats</span>
+                        </div>
+                        <div class="car-price">
+                            $45 <span>/day</span>
+                        </div>
+                        <button class="book-btn">Book Now</button>
                     </div>
-                    <div class="form-group">
-                        <label for="return-date">Return Date</label>
-                        <input type="date" id="return-date">
+                </div>
+                
+                <!-- Car 2 -->
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80" alt="Honda CR-V">
                     </div>
-                    <div class="form-group">
-                        <label for="car-type">Car Type</label>
-                        <select id="car-type">
-                            <option value="">All Car Types</option>
-                            <option value="economy">Economy</option>
-                            <option value="suv">SUV</option>
-                            <option value="luxury">Luxury</option>
-                            <option value="minivan">Minivan</option>
+                    <div class="car-details">
+                        <h3 class="car-title">Honda CR-V</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-car"></i> SUV</span>
+                            <span><i class="fas fa-gas-pump"></i> Gasoline</span>
+                            <span><i class="fas fa-user"></i> 5 Seats</span>
+                        </div>
+                        <div class="car-price">
+                            $65 <span>/day</span>
+                        </div>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                </div>
+                
+                <!-- Car 3 -->
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1549399542-7e82138d0d6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="BMW 5 Series">
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">BMW 5 Series</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-car"></i> Luxury</span>
+                            <span><i class="fas fa-gas-pump"></i> Gasoline</span>
+                            <span><i class="fas fa-user"></i> 5 Seats</span>
+                        </div>
+                        <div class="car-price">
+                            $99 <span>/day</span>
+                        </div>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Car Listing Page -->
+        <section class="container">
+            <h2 class="section-title">Available Rental Cars</h2>
+            
+            <div class="filters">
+                <h3 class="filter-title">Filter Cars</h3>
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <h4>Car Type</h4>
+                        <div class="filter-choices">
+                            <label><input type="checkbox"> Economy</label>
+                            <label><input type="checkbox"> SUV</label>
+                            <label><input type="checkbox"> Luxury</label>
+                            <label><input type="checkbox"> Minivan</label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Price Range</h4>
+                        <div class="filter-choices">
+                            <label><input type="checkbox"> $20-$40</label>
+                            <label><input type="checkbox"> $40-$60</label>
+                            <label><input type="checkbox"> $60-$100</label>
+                            <label><input type="checkbox"> $100+</label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Fuel Type</h4>
+                        <div class="filter-choices">
+                            <label><input type="checkbox"> Gasoline</label>
+                            <label><input type="checkbox"> Diesel</label>
+                            <label><input type="checkbox"> Hybrid</label>
+                            <label><input type="checkbox"> Electric</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cars-grid">
+                <!-- Car 4 -->
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Porsche 911">
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Porsche 911</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-car"></i> Sports</span>
+                            <span><i class="fas fa-gas-pump"></i> Gasoline</span>
+                            <span><i class="fas fa-user"></i> 4 Seats</span>
+                        </div>
+                        <div class="car-price">
+                            $199 <span>/day</span>
+                        </div>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                </div>
+                
+                <!-- Car 5 - Fixed name from Honda Odyssey to Bugatti Chiron -->
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1535732820275-9ffd998cac22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2110&q=80" alt="Bugatti Chiron">
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Bugatti Chiron</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-car"></i> Supercar</span>
+                            <span><i class="fas fa-gas-pump"></i> Gasoline</span>
+                            <span><i class="fas fa-user"></i> 2 Seats</span>
+                        </div>
+                        <div class="car-price">
+                            $999 <span>/day</span>
+                        </div>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                </div>
+                
+                <!-- Car 6 -->
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1563720223880-4aaddc7e507a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Audi Q7">
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Audi Q7</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-car"></i> SUV</span>
+                            <span><i class="fas fa-gas-pump"></i> Diesel</span>
+                            <span><i class="fas fa-user"></i> 7 Seats</span>
+                        </div>
+                        <div class="car-price">
+                            $109 <span>/day</span>
+                        </div>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking System -->
+        <section class="container">
+            <h2 class="section-title">Book Your Rental Car</h2>
+            
+            <div class="booking-form">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">Reservation Details</h3>
+                
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" placeholder="Your first name">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" placeholder="Your last name">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Your email address">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Your phone number">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="car-select">Select Car</label>
+                        <select id="car-select">
+                            <option value="">-- Select a car --</option>
+                            <option value="toyota-corolla">Toyota Corolla - $45/day</option>
+                            <option value="honda-crv">Honda CR-V - $65/day</option>
+                            <option value="bmw-5">BMW 5 Series - $99/day</option>
+                            <option value="porsche-911">Porsche 911 - $199/day</option>
+                            <option value="bugatti-chiron">Bugatti Chiron - $999/day</option>
+                            <option value="audi-q7">Audi Q7 - $109/day</option>
                         </select>
                     </div>
+                    
+                    <div class="form-field">
+                        <label for="rental-days">Rental Duration (Days)</label>
+                        <input type="number" id="rental-days" min="1" value="1">
+                    </div>
                 </div>
-                <button class="search-btn">Search Cars</button>
+                
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="pickup-location-booking">Pick-up Location</label>
+                        <input type="text" id="pickup-location-booking" placeholder="City, Airport, or Address">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="dropoff-location">Drop-off Location</label>
+                        <input type="text" id="dropoff-location" placeholder="City, Airport, or Address">
+                    </div>
+                </div>
+                
+                <button class="submit-btn">Complete Booking</button>
             </div>
-        </div>
-    </section>
-
-<!-- Featured Cars -->
-<section class="container" id="cars">
-    <h2 class="section-title">Featured Rental Cars</h2>
-    ...
-</section>
-
-<!-- Car Listing Page -->
-<section class="container" id="deals">
-    <h2 class="section-title">Available Rental Cars</h2>
-    ...
-</section>
-
-<!-- Booking System -->
-<section class="container" id="locations">
-    <h2 class="section-title">Book Your Rental Car</h2>
-    ...
-</section>
-
-<!-- Footer -->
-<footer id="contact">
-    <div class="container">
-        ...
+        </section>
     </div>
-</footer>
-    </section>
 
-    <!-- Car Listing Page -->
-    <section class="container">
-        <h2 class="section-title">Available Rental Cars</h2>
-        
-        <div class="filters">
-            <h3 class="filter-title">Filter Cars</h3>
-            <div class="filter-options">
-                <div class="filter-group">
-                    <h4>Car Type</h4>
-                    <div class="filter-choices">
-                        <label><input type="checkbox"> Economy</label>
-                        <label><input type="checkbox"> SUV</label>
-                        <label><input type="checkbox"> Luxury</label>
-                        <label><input type="checkbox"> Minivan</label>
-                    </div>
-                </div>
-                
-                <div class="filter-group">
-                    <h4>Price Range</h4>
-                    <div class="filter-choices">
-                        <label><input type="checkbox"> $20-$40</label>
-                        <label><input type="checkbox"> $40-$60</label>
-                        <label><input type="checkbox"> $60-$100</label>
-                        <label><input type="checkbox"> $100+</label>
-                    </div>
-                </div>
-                
-                <div class="filter-group">
-                    <h4>Fuel Type</h4>
-                    <div class="filter-choices">
-                        <label><input type="checkbox"> Gasoline</label>
-                        <label><input type="checkbox"> Diesel</label>
-                        <label><input type="checkbox"> Hybrid</label>
-                        <label><input type="checkbox"> Electric</label>
-                    </div>
-                </div>
+    <!-- Cars Page Content -->
+    <div id="cars-page" class="page-content">
+        <section class="container">
+            <h2 class="page-title">Our Car Fleet</h2>
+            
+            <div class="page-text">
+                <p>Explore our wide selection of vehicles to find the perfect car for your needs. From economical compact cars to luxurious SUVs, we have something for every budget and preference.</p>
             </div>
-        </div>
-        
-        <div class="cars-grid">
-            <!-- Car 4 -->
-            <div class="car-card">
-                <div class="car-image">
-                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Porsche 911">
-                </div>
-                <div class="car-details">
-                    <h3 class="car-title">Porsche 911</h3>
-                    <div class="car-specs">
-                        <span><i class="fas fa-car"></i> Sports</span>
-                        <span><i class="fas fa-gas-pump"></i> Gasoline</span>
-                        <span><i class="fas fa-user"></i> 4 Seats</span>
+            
+            <div class="filters">
+                <h3 class="filter-title">Filter Cars</h3>
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <h4>Car Type</h4>
+                        <div class="filter-choices">
+                            <label><input type="checkbox"> Economy</label>
+                            <label><input type="checkbox"> SUV</label>
+                            <label><input type="checkbox"> Luxury</label>
+                            <label><input type="checkbox"> Minivan</label>
+                        </div>
                     </div>
-                    <div class="car-price">
-                        $199 <span>/day</span>
+                    
+                    <div class="filter-group">
+                        <h4>Price Range</h4>
+                        <div class="filter-choices">
+                            <label><input type="checkbox"> $20-$40</label>
+                            <label><input type="checkbox"> $40-$60</label>
+                            <label><input type="checkbox"> $60-$100</label>
+                            <label><input type="checkbox"> $100+</label>
+                        </div>
                     </div>
-                    <button class="book-btn">Book Now</button>
+                    
+                    <div class="filter-group">
+                        <h4>Fuel Type</h4>
+                        <div class="filter-choices">
+                            <label><input type="checkbox"> Gasoline</label>
+                            <label><input type="checkbox"> Diesel</label>
+                            <label><input type="checkbox"> Hybrid</label>
+                            <label><input type="checkbox"> Electric</label>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <!-- Car 5 -->
-            <div class="car-card">
-                <div class="car-image">
-                    <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Minivan">
+            <div class="cars-grid">
+                <!-- Car 1 -->
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Toyota Corolla">
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Toyota Corolla</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-car"></i> Sedan</span>
+                            <span><i class="fas fa-gas-pump"></i> Hybrid</span>
+                            <span><i class="fas fa-user"></i> 5 Seats</span>
+                        </div>
+                        <div class="car-price">
+                            $45 <span>/day</span>
+                        </div>
+                        <button class="book-btn">Book Now</button>
+                    </div>
                 </div>
-                <div class="car-details">
-                    <h3 class="car-title">Honda Odyssey</h3>
-                    <div class="car-specs">
-                        <span><i class="fas fa-car"></i> Minivan</span>
-                        <span><i class="fas fa-gas-pump"></i> Gasoline</span>
-                        <span><i class="fas fa-user"></i> 7 Seats</span>
+                
+                <!-- Car 2 -->
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80" alt="Honda CR-V">
                     </div>
-                    <div class="car-price">
-                        $75 <span>/day</span>
+                    <div class="car-details">
+                        <h3 class="car-title">Honda CR-V</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-car"></i> SUV</span>
+                            <span><i class="fas fa-gas-pump"></i> Gasoline</span>
+                            <span><i class="fas fa-user"></i> 5 Seats</span>
+                        </div>
+                        <div class="car-price">
+                            $65 <span>/day</span>
+                        </div>
+                        <button class="book-btn">Book Now</button>
                     </div>
-                    <button class="book-btn">Book Now</button>
+                </div>
+                
+                <!-- Car 3 -->
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1549399542-7e82138d0d6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="BMW 5 Series">
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">BMW 5 Series</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-car"></i> Luxury</span>
+                            <span><i class="fas fa-gas-pump"></i> Gasoline</span>
+                            <span><i class="fas fa-user"></i> 5 Seats</span>
+                        </div>
+                        <div class="car-price">
+                            $99 <span>/day</span>
+                        </div>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                </div>
+                
+                <!-- Car 4 -->
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Porsche 911">
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Porsche 911</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-car"></i> Sports</span>
+                            <span><i class="fas fa-gas-pump"></i> Gasoline</span>
+                            <span><i class="fas fa-user"></i> 4 Seats</span>
+                        </div>
+                        <div class="car-price">
+                            $199 <span>/day</span>
+                        </div>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                </div>
+                
+                <!-- Car 5 - Fixed name from Honda Odyssey to Bugatti Chiron -->
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1535732820275-9ffd998cac22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2110&q=80" alt="Bugatti Chiron">
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Bugatti Chiron</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-car"></i> Supercar</span>
+                            <span><i class="fas fa-gas-pump"></i> Gasoline</span>
+                            <span><i class="fas fa-user"></i> 2 Seats</span>
+                        </div>
+                        <div class="car-price">
+                            $999 <span>/day</span>
+                        </div>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                </div>
+                
+                <!-- Car 6 -->
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1563720223880-4aaddc7e507a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Audi Q7">
+                    </div>
+                    <div class="car-details">
+                        <h3 class="car-title">Audi Q7</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-car"></i> SUV</span>
+                            <span><i class="fas fa-gas-pump"></i> Diesel</span>
+                            <span><i class="fas fa-user"></i> 7 Seats</span>
+                        </div>
+                        <div class="car-price">
+                            $109 <span>/day</span>
+                        </div>
+                        <button class="book-btn">Book Now</button>
+                    </div>
                 </div>
             </div>
-            
-            <!-- Car 6 -->
-            <div class="car-card">
-                <div class="car-image">
-                    <img src="https://images.unsplash.com/photo-1563720223880-4aaddc7e507a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Audi Q7">
-                </div>
-                <div class="car-details">
-                    <h3 class="car-title">Audi Q7</h3>
-                    <div class="car-specs">
-                        <span><i class="fas fa-car"></i> SUV</span>
-                        <span><i class="fas fa-gas-pump"></i> Diesel</span>
-                        <span><i class="fas fa-user"></i> 7 Seats</span>
-                    </div>
-                    <div class="car-price">
-                        $109 <span>/day</span>
-                    </div>
-                    <button class="book-btn">Book Now</button>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- Booking System -->
-    <section class="container">
-        <h2 class="section-title">Book Your Rental Car</h2>
-        
-        <div class="booking-form">
-            <h3 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">Reservation Details</h3>
+    <!-- Deals Page Content -->
+    <div id="deals-page" class="page-content">
+        <section class="container">
+            <h2 class="page-title">Special Deals & Offers</h2>
             
-            <div class="form-row">
-                <div class="form-field">
-                    <label for="first-name">First Name</label>
-                    <input type="text" id="first-name" placeholder="Your first name">
+            <div class="page-text">
+                <p>Take advantage of our exclusive deals and special offers. We regularly update our promotions to give you the best value for your money.</p>
+            </div>
+            
+            <div class="deals-grid">
+                <!-- Deal 1 -->
+                <div class="deal-card">
+                    <div class="deal-image">
+                        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Weekend Special">
+                    </div>
+                    <div class="deal-details">
+                        <h3 class="deal-title">Weekend Special</h3>
+                        <p class="deal-description">Get 20% off on all weekend rentals. Perfect for a quick getaway!</p>
+                        <div class="deal-price">
+                            Save up to $50
+                        </div>
+                        <button class="book-btn">Book This Deal</button>
+                    </div>
                 </div>
                 
-                <div class="form-field">
-                    <label for="last-name">Last Name</label>
-                    <input type="text" id="last-name" placeholder="Your last name">
+                <!-- Deal 2 -->
+                <div class="deal-card">
+                    <div class="deal-image">
+                        <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80" alt="Monthly Rental">
+                    </div>
+                    <div class="deal-details">
+                        <h3 class="deal-title">Monthly Rental Discount</h3>
+                        <p class="deal-description">Rent for a month and get 15% off on all vehicle categories.</p>
+                        <div class="deal-price">
+                            Save up to $200
+                        </div>
+                        <button class="book-btn">Book This Deal</button>
+                    </div>
+                </div>
+                
+                <!-- Deal 3 -->
+                <div class="deal-card">
+                    <div class="deal-image">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Luxury Upgrade">
+                    </div>
+                    <div class="deal-details">
+                        <h3 class="deal-title">Free Luxury Upgrade</h3>
+                        <p class="deal-description">Book an economy car for 5+ days and get a free upgrade to a luxury vehicle (subject to availability).</p>
+                        <div class="deal-price">
+                            Limited Time Offer
+                        </div>
+                        <button class="book-btn">Book This Deal</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Locations Page Content -->
+    <div id="locations-page" class="page-content">
+        <section class="container">
+            <h2 class="page-title">Our Locations</h2>
+            
+            <div class="page-text">
+                <p>We have multiple convenient locations across the city and at major airports. Find the one nearest to you for easy pick-up and drop-off.</p>
+            </div>
+            
+            <div class="locations-grid">
+                <!-- Location 1 -->
+                <div class="location-card">
+                    <div class="location-image">
+                        <img src="https://images.unsplash.com/photo-1580554530778-ca36943938b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Downtown Office">
+                    </div>
+                    <div class="location-details">
+                        <h3 class="location-title">Downtown Office</h3>
+                        <p class="location-address">123 Main Street, Downtown</p>
+                        <p class="location-hours">Open: 8:00 AM - 8:00 PM (Mon-Sun)</p>
+                        <button class="book-btn">Select This Location</button>
+                    </div>
+                </div>
+                
+                <!-- Location 2 -->
+                <div class="location-card">
+                    <div class="location-image">
+                        <img src="https://images.unsplash.com/photo-1541336032412-2048a678540d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2067&q=80" alt="Airport Branch">
+                    </div>
+                    <div class="location-details">
+                        <h3 class="location-title">Airport Branch</h3>
+                        <p class="location-address">Airport Terminal B, Level 1</p>
+                        <p class="location-hours">Open: 24/7</p>
+                        <button class="book-btn">Select This Location</button>
+                    </div>
+                </div>
+                
+                <!-- Location 3 -->
+                <div class="location-card">
+                    <div class="location-image">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Westside Location">
+                    </div>
+                    <div class="location-details">
+                        <h3 class="location-title">Westside Location</h3>
+                        <p class="location-address">456 Oak Avenue, Westside</p>
+                        <p class="location-hours">Open: 9:00 AM - 6:00 PM (Mon-Sat)</p>
+                        <button class="book-btn">Select This Location</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page Content -->
+    <div id="contact-page" class="page-content">
+        <section class="container">
+            <h2 class="page-title">Contact Us</h2>
+            
+            <div class="page-text">
+                <p>Have questions or need assistance? Our team is here to help you. Reach out to us through any of the following methods.</p>
+            </div>
+            
+            <div class="contact-grid">
+                <!-- Contact 1 -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3 class="contact-title">Call Us</h3>
+                    <p class="contact-info">+1 (555) 123-4567</p>
+                    <p class="contact-info">Mon-Fri: 8am-8pm</p>
+                    <p class="contact-info">Sat-Sun: 9am-5pm</p>
+                </div>
+                
+                <!-- Contact 2 -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="contact-title">Email Us</h3>
+                    <p class="contact-info">info@rentacar.com</p>
+                    <p class="contact-info">support@rentacar.com</p>
+                    <p class="contact-info">We respond within 24 hours</p>
+                </div>
+                
+                <!-- Contact 3 -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="contact-title">Visit Us</h3>
+                    <p class="contact-info">123 Rental Street</p>
+                    <p class="contact-info">City, State 12345</p>
+                    <p class="contact-info">United States</p>
                 </div>
             </div>
             
-            <div class="form-row">
-                <div class="form-field">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="Your email address">
+            <div class="booking-form">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">Send Us a Message</h3>
+                
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="contact-name">Your Name</label>
+                        <input type="text" id="contact-name" placeholder="Your full name">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="contact-email">Email Address</label>
+                        <input type="email" id="contact-email" placeholder="Your email address">
+                    </div>
                 </div>
                 
                 <div class="form-field">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" placeholder="Your phone number">
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-field">
-                    <label for="car-select">Select Car</label>
-                    <select id="car-select">
-                        <option value="">-- Select a car --</option>
-                        <option value="toyota-corolla">Toyota Corolla - $45/day</option>
-                        <option value="honda-crv">Honda CR-V - $65/day</option>
-                        <option value="bmw-5">BMW 5 Series - $99/day</option>
-                        <option value="porsche-911">Porsche 911 - $199/day</option>
-                        <option value="honda-odyssey">Honda Odyssey - $75/day</option>
-                        <option value="audi-q7">Audi Q7 - $109/day</option>
-                    </select>
+                    <label for="contact-subject">Subject</label>
+                    <input type="text" id="contact-subject" placeholder="Subject of your message">
                 </div>
                 
                 <div class="form-field">
-                    <label for="rental-days">Rental Duration (Days)</label>
-                    <input type="number" id="rental-days" min="1" value="1">
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-field">
-                    <label for="pickup-location-booking">Pick-up Location</label>
-                    <input type="text" id="pickup-location-booking" placeholder="City, Airport, or Address">
+                    <label for="contact-message">Message</label>
+                    <textarea id="contact-message" placeholder="Your message" rows="5" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; font-family: inherit;"></textarea>
                 </div>
                 
-                <div class="form-field">
-                    <label for="dropoff-location">Drop-off Location</label>
-                    <input type="text" id="dropoff-location" placeholder="City, Airport, or Address">
-                </div>
+                <button class="submit-btn">Send Message</button>
             </div>
-            
-            <button class="submit-btn">Complete Booking</button>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -819,15 +1353,12 @@
                 </div>
                 
                 <div class="footer-section">
-                    <nav>
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#cars">Cars</a></li>
-        <li><a href="#deals">Deals</a></li>
-        <li><a href="#locations">Locations</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</nav>
+                    <h3>Quick Links</h3>
+                    <a href="#" class="nav-link" data-page="home">Home</a>
+                    <a href="#" class="nav-link" data-page="cars">Cars</a>
+                    <a href="#" class="nav-link" data-page="deals">Deals</a>
+                    <a href="#" class="nav-link" data-page="locations">Locations</a>
+                    <a href="#" class="nav-link" data-page="contact">Contact</a>
                 </div>
                 
                 <div class="footer-section">
@@ -859,7 +1390,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2 class="modal-title">Login to Your Account</h2>
-            <form class="modal-form">
+            <form class="modal-form" id="loginForm">
                 <div class="form-field">
                     <label for="login-email">Email</label>
                     <input type="email" id="login-email" placeholder="Enter your email" required>
@@ -881,7 +1412,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2 class="modal-title">Create an Account</h2>
-            <form class="modal-form">
+            <form class="modal-form" id="registerForm">
                 <div class="form-field">
                     <label for="register-name">Full Name</label>
                     <input type="text" id="register-name" placeholder="Enter your full name" required>
@@ -919,8 +1450,29 @@
         const switchToRegister = document.getElementById('switchToRegister');
         const switchToLogin = document.getElementById('switchToLogin');
         const closeButtons = document.querySelectorAll('.close');
-        const loginForm = document.querySelector('#loginModal form');
-        const registerForm = document.querySelector('#registerModal form');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageContents = document.querySelectorAll('.page-content');
+
+        // Navigation functionality
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('data-page');
+                
+                // Hide all page contents
+                pageContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show the selected page
+                document.getElementById(`${page}-page`).classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
 
         // Show Login Modal
         loginBtn.addEventListener('click', () => {
@@ -1044,11 +1596,23 @@
                 });
             }
             
+            // Contact form submission
+            const contactForm = document.querySelector('#contact-page .booking-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
+                });
+            }
+            
             // Book now buttons
             const bookButtons = document.querySelectorAll('.book-btn');
             bookButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    alert('Redirecting to booking page...');
+                    // Show the booking form section
+                    document.getElementById('home-page').classList.add('active');
+                    document.querySelector('.booking-form').scrollIntoView({ behavior: 'smooth' });
                 });
             });
         });
