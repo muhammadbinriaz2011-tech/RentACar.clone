@@ -76,6 +76,11 @@
             color: #ffc107;
         }
         
+        .nav-link.active {
+            color: #ffc107;
+            border-bottom: 2px solid #ffc107;
+        }
+        
         .auth-buttons button {
             background-color: #ffc107;
             border: none;
@@ -1461,18 +1466,29 @@
                 e.preventDefault();
                 const page = link.getAttribute('data-page');
                 
+                // Remove active class from all links
+                navLinks.forEach(l => l.classList.remove('active'));
+                // Add active class to all links with the same data-page
+                document.querySelectorAll(`.nav-link[data-page="${page}"]`).forEach(l => l.classList.add('active'));
+                
                 // Hide all page contents
                 pageContents.forEach(content => {
                     content.classList.remove('active');
                 });
                 
                 // Show the selected page
-                document.getElementById(`${page}-page`).classList.add('active');
+                const targetPage = document.getElementById(`${page}-page`);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
                 
                 // Scroll to top
                 window.scrollTo(0, 0);
             });
         });
+
+        // Set initial active link for Home
+        document.querySelectorAll('.nav-link[data-page="home"]').forEach(link => link.classList.add('active'));
 
         // Show Login Modal
         loginBtn.addEventListener('click', () => {
@@ -1583,6 +1599,12 @@
             if (searchForm) {
                 searchForm.addEventListener('submit', function(e) {
                     e.preventDefault();
+                    const pickupDate = document.getElementById('pickup-date').value;
+                    const returnDate = document.getElementById('return-date').value;
+                    if (pickupDate && returnDate && new Date(returnDate) < new Date(pickupDate)) {
+                        alert('Return date must be after pickup date.');
+                        return;
+                    }
                     alert('Searching for available cars...');
                 });
             }
